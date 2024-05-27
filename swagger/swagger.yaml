@@ -1,0 +1,196 @@
+openapi: 3.0.3
+info:
+  title: Swagger Resource - OpenAPI 3.0
+  description: |-
+    Api de recursos
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost/api
+tags:
+  - name: Resources
+    description: Api de recursos
+    externalDocs:
+      description: Mais
+      url: http://swagger.io
+
+paths:
+  /resources:
+    post:
+      tags:
+        - resources
+      summary: Adiciona um novo resource
+      description: Adiciona um novo resource
+      operationId: addResource
+      requestBody:
+        description: Cria um novo resource
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+    put:
+      tags:
+        - resources
+      summary: Atualiza um recurso existente adicionando tags ao mesmo
+      description: Atualiza um recurso adicionando novas tags
+      operationId: updateResource
+      requestBody:
+        description: Atualiza um recurso existente
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagRequestUpdate'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Resource not found
+        '422':
+          description: Validation exception
+
+    get:
+      tags:
+        - resources
+      summary: Listagem de recursos
+      description: Lista os recursos paginados
+      operationId: findResources
+      parameters:
+        - name: page
+          in: query
+          description: Numero da página
+          required: false
+          schema:
+            type: integer
+        - name: size
+          in: query
+          description: tamanho da página
+          required: false
+          schema:
+            type: integer
+        - name: name
+          in: query
+          description: Nome do recurso
+          required: false
+          schema:
+            type: string
+        - name: tag
+          in: query
+          description: nome da tag
+          required: false
+          schema:
+            type: string
+
+
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceResponse'
+        '400':
+          description: Invalid status value
+
+  /resources/{name}:
+    delete:
+      tags:
+        - resources
+      summary: Deleta um recurso e suas tags associadas
+      description: Deleta um recurso
+      operationId: deleteResource
+      parameters:
+        - name: name
+          in: path
+          description: Resource name to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: successful operation
+        '422':
+          description: Validation error
+        '400':
+          description: Invalid resource value
+
+components:
+  schemas:
+
+    ResourceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagRequest'
+
+    TagRequestUpdate:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagRequest'
+
+    TagRequest:
+      type: object
+      properties:
+        value:
+          type: string
+
+    ResourceResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        createDate:
+          type: string
+          format: date-time
+        updateDate:
+          type: string
+          format: date-time
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponse'
+
+
+
+    TagResponse:
+      type: object
+      properties:
+        value:
+          type: string
