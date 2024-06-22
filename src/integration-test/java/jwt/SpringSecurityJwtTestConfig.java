@@ -69,7 +69,7 @@ public class SpringSecurityJwtTestConfig {
     }
 
     @Bean
-    public Flyway flyway(final DataSource dataSource, final PostgreSQLContainer postgreSQLContainer) {
+    public Flyway flyway(final DataSource dataSource) {
         final FluentConfiguration configure = Flyway
                 .configure()
                 .dataSource(dataSource)
