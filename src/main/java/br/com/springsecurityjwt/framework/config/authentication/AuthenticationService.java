@@ -1,5 +1,6 @@
-package br.com.springsecurityjwt.security;
+package br.com.springsecurityjwt.framework.config.authentication;
 
+import br.com.springsecurityjwt.application.domain.authentication.Token;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 

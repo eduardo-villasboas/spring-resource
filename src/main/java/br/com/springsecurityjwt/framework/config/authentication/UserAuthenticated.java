@@ -1,6 +1,6 @@
-package br.com.springsecurityjwt.security;
+package br.com.springsecurityjwt.framework.config.authentication;
 
-import br.com.springsecurityjwt.model.TBUser;
+import br.com.springsecurityjwt.resource.model.TBUser;
 import java.util.Collection;
 import java.util.List;
 

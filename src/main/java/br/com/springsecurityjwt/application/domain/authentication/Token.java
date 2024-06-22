@@ -1,10 +1,10 @@
-package br.com.springsecurityjwt.security;
+package br.com.springsecurityjwt.application.domain.authentication;
 
 public class Token {
 
     private final String token;
 
-    Token(String token) {
+    public Token(String token) {
         this.token = token;
     }
 

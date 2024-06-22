@@ -1,4 +1,4 @@
-package br.com.springsecurityjwt.security;
+package br.com.springsecurityjwt.framework.config.authentication;
 
 import java.time.Instant;
 import java.util.stream.Collectors;

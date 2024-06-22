@@ -1,4 +1,4 @@
-package br.com.springsecurityjwt.config;
+package br.com.springsecurityjwt.framework.config.authentication;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;

@@ -1,7 +1,7 @@
 package br.com.springsecurityjwt;
 
-import br.com.springsecurityjwt.model.TBUser;
-import br.com.springsecurityjwt.repository.UserRepository;
+import br.com.springsecurityjwt.resource.model.TBUser;
+import br.com.springsecurityjwt.resource.model.UserRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;

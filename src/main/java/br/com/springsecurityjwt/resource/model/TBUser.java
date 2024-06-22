@@ -1,4 +1,4 @@
-package br.com.springsecurityjwt.model;
+package br.com.springsecurityjwt.resource.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

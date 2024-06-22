@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "7619fb41-3687-4694-840d-bba077232219",
 		"name": "api-tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12612970"
 	},
 	"item": [
@@ -23,7 +23,12 @@
 								}
 							}
 						},
-						"url": "{{url}}/resources"
+						"url": {
+							"raw": "{{url}}resources",
+							"host": [
+								"{{url}}resources"
+							]
+						}
 					},
 					"response": []
 				},
@@ -33,12 +38,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/resources?page=0&size=10&name=Toyota&tag=SUV",
+							"raw": "{{url}}resources?page=0&size=10&name=Toyota&tag=SUV",
 							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"resources"
+								"{{url}}resources"
 							],
 							"query": [
 								{
@@ -76,7 +78,16 @@
 								}
 							}
 						},
-						"url": "{{url}}/resources/Toyota"
+						"url": {
+							"raw": "{{url}}resources/1/tags",
+							"host": [
+								"{{url}}resources"
+							],
+							"path": [
+								"1",
+								"tags"
+							]
+						}
 					},
 					"response": []
 				},
@@ -85,23 +96,31 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{url}}/resources/Toyota"
+						"url": {
+							"raw": "{{url}}resources/1",
+							"host": [
+								"{{url}}resources"
+							],
+							"path": [
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "delete a tag",
+					"name": "delete tags",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/resources/Toyota?tag=Japan,Corolla",
+							"raw": "{{url}}resources/1/tags?tag=Japan,Corolla",
 							"host": [
-								"{{url}}"
+								"{{url}}resources"
 							],
 							"path": [
-								"resources",
-								"Toyota"
+								"1",
+								"tags"
 							],
 							"query": [
 								{
@@ -135,14 +154,27 @@
 			"request": {
 				"auth": {
 					"type": "basic",
-					"basic": {
-						"password": "{{pass}}",
-						"username": "{{user}}"
-					}
+					"basic": [
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
-				"url": "{{url}}/authenticate"
+				"url": {
+					"raw": "{{url}}authenticate",
+					"host": [
+						"{{url}}authenticate"
+					]
+				}
 			},
 			"response": []
 		},
@@ -151,16 +183,25 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{url}}/private"
+				"url": {
+					"raw": "{{url}}private",
+					"host": [
+						"{{url}}private"
+					]
+				}
 			},
 			"response": []
 		}
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": {
-			"token": "{{token}}"
-		}
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
 	},
 	"event": [
 		{

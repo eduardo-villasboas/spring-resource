@@ -1,4 +1,4 @@
-package br.com.springsecurityjwt.jwt;
+package jwt;
 
 import org.junit.jupiter.api.Test;
 
