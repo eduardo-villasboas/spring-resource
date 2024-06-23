@@ -3,9 +3,7 @@ package br.com.springsecurityjwt;
 import br.com.springsecurityjwt.resource.model.TBUser;
 import br.com.springsecurityjwt.resource.model.UserRepository;
 import java.util.Optional;
-import org.springdoc.core.GroupedOpenApi;
 import org.springdoc.core.SpringDocUIConfiguration;
-import org.springdoc.core.SwaggerUiConfigParameters;
 import org.springdoc.core.configuration.SpringDocConfiguration;
 import org.springdoc.core.SwaggerUiConfigProperties;
 import org.springdoc.core.properties.SpringDocConfigProperties;
@@ -15,7 +13,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication(
@@ -23,10 +20,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
                 "br.com.springsecurityjwt"
         }
 )
-public class SpringSecurityJwtApplication {
+public class SpringResourceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringSecurityJwtApplication.class, args);
+        SpringApplication.run(SpringResourceApplication.class, args);
     }
 
     @Autowired
@@ -61,6 +58,7 @@ public class SpringSecurityJwtApplication {
 
     @Bean
     ObjectMapperProvider objectMapperProvider(SpringDocConfigProperties springDocConfigProperties) {
+
         return new ObjectMapperProvider(springDocConfigProperties);
     }
 

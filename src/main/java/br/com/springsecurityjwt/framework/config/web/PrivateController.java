@@ -10,7 +10,7 @@ public class PrivateController {
 
   @GetMapping
   public String getMessage() {
-    return "Hello from private API controller";
+    return "Hello from private API controller ;-)";
   }
 
 }

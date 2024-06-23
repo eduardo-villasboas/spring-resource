@@ -30,10 +30,18 @@ docker compose -f compose.yaml up -d --build
 ./mvnw clean package
 ```
 
-- Executar:
+- Executar com java -jar:
+```bash
+java -jar ./target/spring-resource-0.0.1-SNAPSHOT.jar
 ```
-java -jar ./target/jwt-0.0.1-SNAPSHOT.jar
+### obs: Para subir atravez do comando java -jar é preciso subir o banco através do arquivo compose.yaml na raiz do projeto
+
+- Executar com o plugin do maven
+```bash
+ ./mvnw spring-boot:run
 ```
+### obs: Através desse método não é necessário subir o container do banco pois o mesmo deveria ser iniciado automaticamente. Porém, ao se enfrentar qualquer problema de conexão é aconselhado que você suba o container manualmente. Outra observação importante é garantir que não existe nenhum outro programa conectado na porta 5454, pois essa porta é a porta que o compose.yaml configura do banco postgresql local
+
 
 - Importar a collection do postman e o arquivo de variáveis de ambiente disponíveis na pasta **postman** na raiz do projeto executar o endpoint de atenticação depois o endpoint para acessar o recurso privado
 Respectivamente
@@ -63,7 +71,7 @@ Obs:
 - No total serão 5 endpoints
 - Os ids das entidades não devem ser retornados pelos endpoints
 - A entidade recurso(resource) deve ter um campo de data de criação e data de atualização que deve sempre ser retornada no body de resposta
-- Dentro da pasta swagger existe uma definição do swagger com requests e responses a fim de facilitar as implementações. O site do [swagger editor](https://editor.swagger.io/) fornece uma interface amigável para visualizar essa documentação 
+- Dentro da pasta swagger existe uma definição do swagger com requests e responses a fim de facilitar as implementações. O site do [swagger editor](https://editor.swagger.io/) fornece uma interface amigável para visualizar essa documentação e você também pode acessar essa documentação através da url http://localhost:8080/api/swagger-ui/index.html, lembrando que é preciso authenticar para acessar esse recurso também e o usuário e senha padrão são respectivamente "usuario" e "password" sem aspas
 
 ## Definição das regras
 
@@ -86,8 +94,7 @@ Obs:
 - O endpoint não deve retornar um body
 
 ### delete-tags
-- **Esse recurso vamos implementar em conjunto durante a próxima entrevista, então não é necessário implementá-lo ainda**
-- O endpoint deve retornar um 200
+- O endpoint deve retornar um 200 em caso de sucesso
 - O endpoint deve retornar o recurso recém-atualizado com todas as tags contidas no banco 
 
 

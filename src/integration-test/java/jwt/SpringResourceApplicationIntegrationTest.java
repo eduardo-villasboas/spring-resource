@@ -2,7 +2,7 @@ package jwt;
 
 import org.junit.jupiter.api.Test;
 
-class SpringSecurityJwtApplicationIntegrationTest extends BaseTestComponent {
+class SpringResourceApplicationIntegrationTest extends BaseTestComponent {
 
 	@Test
 	void contextLoads() {

@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.springsecurityjwt</groupId>
-    <artifactId>jwt</artifactId>
+    <artifactId>spring-resource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-resource</name>
     <description>Demo project for Spring Boot</description>

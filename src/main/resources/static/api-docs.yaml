@@ -108,7 +108,7 @@ paths:
   /resources/{id}/tags:
     put:
       tags:
-        - resources
+        - tags
       summary: Atualiza um recurso existente adicionando tags ao mesmo
       description: Atualiza um recurso adicionando novas tags
       operationId: updateResource
@@ -154,29 +154,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseValidationError'
 
-
-  /resources/{id}:
     delete:
       tags:
-        - resources
-      summary: Deleta um recurso e suas tags associadas
-      description: Deleta um recurso
-      operationId: deleteResource
+        - tags
+      summary: Deleta as tags associadas a um dado recurso
+      description: Deleta tags, o query param tag pode receber um ou mais tags separadas por vírgula
+      operationId: deleteTags
       parameters:
         - name: id
           in: path
-          description: Resource name to delete
+          description: id of resource
           required: true
           schema:
             type: integer
             format: int64
+        - name: tag
+          in: query
+          required: true
+          schema:
+            type: string
+            example: Japan,Corolla
       responses:
-        '204':
+        '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseNoContent'
+                $ref: '#/components/schemas/ResourceResponse'
+
         '422':
           description: Validation error
           content:
@@ -196,6 +201,46 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponseNotFound'
 
+  /resources/{id}:
+    delete:
+      tags:
+        - resources
+      summary: Deleta um recurso e suas tags associadas
+      description: Deleta um recurso
+      operationId: deleteResource
+      parameters:
+        - name: id
+          in: path
+          description: Resource name to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceResponse'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseValidationError'
+        '400':
+          description: Invalid resource value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseInvalidResourceValue'
+        '404':
+          description: Resource Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseNotFound'
 
 components:
   schemas:
@@ -320,22 +365,13 @@ components:
           type: string
           example: flex
 
-    ErrorResponseNoContent:
-      type: object
-      properties:
-        code:
-          type: string
-          example: 1010
-        message:
-          type: string
-          example: "Sucess updating resource"
 
     ErrorResponseValidationError:
       type: object
       properties:
         code:
           type: string
-          example: 1010
+          example: 1011
         message:
           type: string
           example: "Validation error"
@@ -345,7 +381,7 @@ components:
       properties:
         code:
           type: string
-          example: 1010
+          example: 1013
         message:
           type: string
           example: "Error. Invalid value on resource"
@@ -355,7 +391,7 @@ components:
       properties:
         code:
           type: string
-          example: 1010
+          example: 1014
         message:
           type: string
           example: "Resource not found"
