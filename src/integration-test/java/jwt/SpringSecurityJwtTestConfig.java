@@ -75,6 +75,7 @@ public class SpringSecurityJwtTestConfig {
                 .dataSource(dataSource)
                 .locations("classpath:db/migration")
                 .schemas("public")
+                .communityDBSupportEnabled(true)
                 .createSchemas(true);
         final Flyway flyway = new Flyway(configure);
         flyway.migrate();

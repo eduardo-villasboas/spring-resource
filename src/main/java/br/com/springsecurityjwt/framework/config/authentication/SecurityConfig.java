@@ -27,39 +27,41 @@ import com.nimbusds.jose.proc.SecurityContext;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-  @Value("${jwt.public.key}")
-  private RSAPublicKey key;
-  @Value("${jwt.private.key}")
-  private RSAPrivateKey priv;
+    @Value("${jwt.public.key}")
+    private RSAPublicKey key;
+    @Value("${jwt.private.key}")
+    private RSAPrivateKey priv;
 
-  @Bean
-  SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(
-            auth -> auth
-                .requestMatchers("/api/authenticate").permitAll()
-                .anyRequest().authenticated())
-        .httpBasic(Customizer.withDefaults())
-        .oauth2ResourceServer(
-            conf -> conf.jwt(
-                jwt -> jwt.decoder(jwtDecoder())));
-    return http.build();
-  }
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(
+                        auth -> auth
+                                .requestMatchers(
+                                        "/api/authenticate"
+                                ).permitAll().anyRequest().authenticated()
+                )
+                .httpBasic(Customizer.withDefaults())
+                .oauth2ResourceServer(
+                        conf -> conf.jwt(
+                                jwt -> jwt.decoder(jwtDecoder())));
+        return http.build();
+    }
 
-  @Bean
-  PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-  @Bean
-  JwtDecoder jwtDecoder() {
-    return NimbusJwtDecoder.withPublicKey(this.key).build();
-  }
+    @Bean
+    JwtDecoder jwtDecoder() {
+        return NimbusJwtDecoder.withPublicKey(this.key).build();
+    }
 
-  @Bean
-  JwtEncoder jwtEncoder() {
-    JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
-    JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-    return new NimbusJwtEncoder(jwks);
-  }
+    @Bean
+    JwtEncoder jwtEncoder() {
+        JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
+        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
+        return new NimbusJwtEncoder(jwks);
+    }
 }
