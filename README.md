@@ -71,7 +71,7 @@ Obs:
 - No total serão 5 endpoints
 - Os ids das entidades não devem ser retornados pelos endpoints
 - A entidade recurso(resource) deve ter um campo de data de criação e data de atualização que deve sempre ser retornada no body de resposta
-- Dentro da pasta swagger existe uma definição do swagger com requests e responses a fim de facilitar as implementações. O site do [swagger editor](https://editor.swagger.io/) fornece uma interface amigável para visualizar essa documentação e você também pode acessar essa documentação através da url http://localhost:8080/api/swagger-ui/index.html, lembrando que é preciso authenticar para acessar esse recurso também e o usuário e senha padrão são respectivamente "usuario" e "password" sem aspas
+- Dentro da pasta resources/static/ existe uma definição do swagger com requests e responses a fim de facilitar as implementações. O site do [swagger editor](https://editor.swagger.io/) fornece uma interface amigável para visualizar essa documentação e você também pode acessar essa documentação através da url http://localhost:8080/api/swagger-ui/index.html, lembrando que é preciso authenticar para acessar esse recurso também e o usuário e senha padrão são respectivamente "usuario" e "password" sem aspas
 
 ## Definição das regras
 
